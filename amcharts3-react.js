@@ -187,15 +187,20 @@
       });
     },
 
-    // TODO is this correct ? should this use componentWillUpdate instead ?
-    componentDidUpdate: function (oldProps) {
-      var didUpdate = updateChartObject(this.state.chart, oldProps, this.props);
-
-      if (didUpdate) {
-        // TODO is this correct ?
-        this.state.chart.validateNow(true, false);
-      }
+    componentWillReceiveProps(nextProps) {
+      this.state.chart.dataProvider = nextProps.dataProvider
+      this.state.chart.validateNow(true, false);
     },
+
+    // TODO is this correct ? should this use componentWillUpdate instead ?
+    // componentDidUpdate: function (oldProps) {
+    //   var didUpdate = updateChartObject(this.state.chart, oldProps, this.props);
+
+    //   if (didUpdate) {
+    //     // TODO is this correct ?
+    //     this.state.chart.validateNow(true, false);
+    //   }
+    // },
 
     componentWillUnmount: function () {
       if (this.state.chart) {
